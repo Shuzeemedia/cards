@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+            font-family: sans-serif;
+        }
+
+        body{
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        table,
+        td,
+        th,
+        tr,
+        thead,
+        tbody {
+            border-collapse: collapse;
+            padding: 10px;
+            border: 2px solid #0082e6;
+        }
+
+        td{
+            color: #0082e6;
+        }
+
+
+        #section {
+            background-color: #fff;
+            height: fit-content;
+            width: fit-content;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+            padding: 30px;
+            box-shadow: 0 0 15px #0082e6;
+            border-radius: 10px;
+        }
+
+        select {
+            padding: 10px 14px;
+            border-radius: 10px;
+            border-color: #0082e6;
+        }
+
+        #sele{
+            width: 100%;
+            /* background-color: yellow; */
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #genx{
+            padding: 10px 15px;
+            border-radius: 10px;
+            background-color: #0082e6;
+            /* box-shadow: 0 0 15px #0082e6; */
+            border: 1px solid #0082e6;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        #genx:hover{
+            box-shadow: 0 0 15px #0082e6;
+            transition: all linear .2s;
+        }
+
+        #myCode{
+            padding: 10px 0 10px 10px;
+            width: 100%;
+            border: 1px solid #0082e6;
+            border-radius: 10px;
+        }
+
+        #mypin{
+            font-weight: bold;
+            color: #0082e6;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="section">
+        <div id="sele">
+            <select id="Provider">
+                <option value=""> Choose Provider</option>
+                <option value="MTN"> MTN</option>
+                <option value="GLO"> GLO</option>
+                <option value="AIRTEL"> AIRTEL</option>
+                <option value="9MOBILE"> 9MOBILE</option>
+            </select>
+
+
+            <select id="Amount">
+                <option value=""> Choose Amount</option>
+                <option value="100"> 100</option>
+                <option value="200"> 200</option>
+                <option value="500"> 500</option>
+                <option value="1000"> 1000</option>
+            </select>
+        </div>
+
+        
+
+        <button onclick="generatePin()" id="genx">Generate Pin</button>
+        
+        <p id="mypin"> </p>
+
+        
+
+        <input id="myCode" type="text" value="*311*#" placeholder="load card here">
+        
+        <button onclick="loadCard()" id="genx"> Load card</button>
+
+
+
+        <div>
+
+            <!-- <button onclick="display(rechargeCards)"> all cards </button> <button onclick="displayUsed()"> used cards
+        </button> <button onclick="displayUnUsed()"> un-used cards </button> -->
+
+            <table>
+                <thead>
+                    <th> s/n</th>
+                    <th> provider </th>
+                    <th> amount </th>
+                    <th> pin </th>
+                    <th> validity </th>
+
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+            </table>
+
+            <span id="MTN">
+
+            </span>
+            <span id="GLO">
+
+            </span>
+
+        </div>
+    </div>
+
+</body>
+<!-- <table>
+    <td><tr></tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr></td>
+</table> -->
+
+</html>
+<script>
+    let pin = document.getElementById("mypin")
+    let provider = document.getElementById('Provider')
+    let amount = document.getElementById('Amount')
+    let tab = document.getElementById("tbody")
+    let snum = 0
+    value = true
+    function generatePin() {
+        snum++
+        let p_val = provider.value
+        console.log(p_val);
+
+        let a_val = amount.value
+        console.log(amount.value);
+
+        function gen() {
+            space = ""
+            for (let i = 0; i <= 11; i++) {
+                space += Math.floor(Math.random() * 10)
+            }
+            pin.innerHTML = `PIN: ${space}`
+        }
+
+        if (!p_val || !a_val) {
+            if (p_val && !a_val) {
+                alert("Please enter an amount")
+            }
+            else if (!p_val && a_val) {
+                alert("Please enter a provider")
+            }
+            else {
+                alert("Please enter a provider and an amount")
+            }
+        }
+
+        else {
+            gen()
+            value = false
+            tab.innerHTML += `<tr><td>${snum}</td> <td>${p_val}</td> <td>${a_val}</td> <td>${space}</td> <td>${value}</td></tr>`
+            provider.value = ""
+            amount.value = ""
+        }
+
+
+
+
+
+    }
+</script>
