@@ -156,7 +156,7 @@
         <div>
 
             <span>
-                <button onclick="displayAllCard()" id="genz"> all cards </button> <button onclick="displayUsed()"
+                <button onclick="display(rechargeCards)" id="genz"> all cards </button> <button onclick="displayUsed()"
                     id="genz"> used cards
                 </button> <button onclick="displayUnUsed()" id="genz"> un-used cards </button>
             </span>
@@ -233,7 +233,7 @@
             if (`*311*${db[i].pin}#` === val && db[i].valid === false) {
                 db[i].valid = true;
                 totalBalance += db[i].amount;
-                balance.innerHTML = `BALANCE: #${totalBalance}`;
+                balance.innerHTML = `BALANCE: ${totalBalance}`;
                 found = true;
                 break;
             }
@@ -260,6 +260,17 @@
         });
     }
 
+    // function displayUsed() {
+    //     const used = db.filter(item => item.valid === true);
+    //     display(used);
+    // }
+
+    // function displayUnUsed() {
+    //     const unused = db.filter(item => item.valid === false);
+    //     display(unused);
+    // }
+
+
     function displayUsed() {
         const used = db.filter((item) => {
             return item.valid === true;
@@ -272,10 +283,6 @@
             return item.valid === false;
         });
         display(unused);
-    }
-
-    function displayAllCard(){
-        display(db)
     }
 
 </script>
